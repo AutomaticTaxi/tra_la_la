@@ -4,6 +4,9 @@
  */
 package Telas;
 
+import Banco.Banco_Prepare;
+import Model.Pessoa;
+
 /**
  *
  * @author lucas
@@ -30,12 +33,12 @@ public class Tela_Principal extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        jTextField_Nome = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        jTextField_Idade = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        jTextField_CPF = new javax.swing.JTextField();
+        Bt_Add = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
@@ -65,7 +68,12 @@ public class Tela_Principal extends javax.swing.JFrame {
 
         jLabel4.setText("CPF");
 
-        jButton1.setText("Adicionar");
+        Bt_Add.setText("Adicionar");
+        Bt_Add.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Bt_AddActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Editar ");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -106,21 +114,21 @@ public class Tela_Principal extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField1))
+                                .addComponent(jTextField_Nome))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField2))
+                                .addComponent(jTextField_Idade))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField3)))
+                                .addComponent(jTextField_CPF)))
                         .addGap(206, 206, 206))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel1)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton1)
+                                .addComponent(Bt_Add)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -137,18 +145,18 @@ public class Tela_Principal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextField_Nome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextField_Idade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextField_CPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(Bt_Add)
                     .addComponent(jButton2)
                     .addComponent(jButton3)
                     .addComponent(jButton4))
@@ -164,13 +172,53 @@ public class Tela_Principal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void Bt_AddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Bt_AddActionPerformed
+        // TODO add your handling code here:
+        Pessoa pessoa = new Pessoa();
+        pessoa.setNome(jTextField_Nome.getText());
+        pessoa.setIdade(Integer.valueOf(jTextField_Idade.getText()));
+        pessoa.setCPF(jTextField_CPF.getText());
+        Banco.Banco_Prepare bd = new Banco_Prepare();
+        bd.Inserir(pessoa);
+        System.out.println("OK inserir ");
+        /*
+               // TODO add your handling code here:
+        String[] ColumNames = new String[]{"ID", "Referencia", "Descricao", "Marca", "Aplicacao", "ValorCompra","ValorVenda","Quantidade"};
+        BancoJPA banco = new BancoJPA();
+        Pecas c = new Pecas();
+        List<Pecas> dados = banco.listar(c);
+        
+  
+        
+
+        Object[][] data = new Object[dados.size()][ColumNames.length];
+
+        for (int i = 0; i < dados.size(); i++) {
+            data[i][0] = dados.get(i).getID();
+            data[i][1] = dados.get(i).getReferencia();
+            data[i][2] = dados.get(i).getDescricao();
+            data[i][3] = dados.get(i).getMarca();
+            data[i][4] = dados.get(i).getAplicacao();
+            data[i][5] = dados.get(i).getValorCompra();
+            data[i][6] = dados.get(i).getValorVenda();
+            data[i][7] = dados.get(i).getQuantidade();
+        }
+
+        DefaultTableModel modelo = new DefaultTableModel(data, ColumNames);
+        jTable1.setModel(modelo);
+    }                                      
+
+        */
+
+    }//GEN-LAST:event_Bt_AddActionPerformed
+
     /**
      * @param args the command line arguments
      */
   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton Bt_Add;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -182,8 +230,8 @@ public class Tela_Principal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTextField_CPF;
+    private javax.swing.JTextField jTextField_Idade;
+    private javax.swing.JTextField jTextField_Nome;
     // End of variables declaration//GEN-END:variables
 }
